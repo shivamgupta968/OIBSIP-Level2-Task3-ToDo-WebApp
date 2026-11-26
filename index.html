@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="A clean, responsive to-do app to plan your day and track completed tasks.">
+  <title>TaskFlow — To-Do Web App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="TaskFlow home"><span class="brand-mark">✓</span><span>taskflow</span></a>
+      <span class="today" id="todayLabel"></span>
+    </header>
+
+    <section class="welcome">
+      <div>
+        <p class="eyebrow">YOUR PERSONAL WORKSPACE</p>
+        <h1>Make today<br><span>count.</span></h1>
+        <p class="subtitle">A little progress every day adds up to big results.</p>
+      </div>
+      <div class="progress-card">
+        <div class="progress-head"><span>Daily progress</span><strong id="progressPercent">0%</strong></div>
+        <div class="progress-track"><span id="progressBar"></span></div>
+        <p id="progressCaption">Your day is a blank canvas. Let's get started.</p>
+        <div class="progress-icon">✦</div>
+      </div>
+    </section>
+
+    <section class="composer panel" aria-label="Add a task">
+      <div class="composer-icon">＋</div>
+      <form id="taskForm">
+        <label class="sr-only" for="taskInput">What needs to get done?</label>
+        <input id="taskInput" type="text" maxlength="120" placeholder="What needs to get done?" autocomplete="off" required>
+        <select id="priorityInput" aria-label="Task priority">
+          <option value="medium">Medium</option><option value="high">High</option><option value="low">Low</option>
+        </select>
+        <button class="add-button" type="submit"><span>＋</span> Add task</button>
+      </form>
+    </section>
+    <p class="form-error" id="formError" role="alert"></p>
+
+    <section class="task-area">
+      <div class="section-heading">
+        <div><p class="eyebrow">STAY ON TRACK</p><h2>Your tasks</h2></div>
+        <div class="filters" role="group" aria-label="Filter tasks">
+          <button class="filter active" data-filter="all" type="button">All <span id="allCount">0</span></button>
+          <button class="filter" data-filter="pending" type="button">Pending <span id="pendingCount">0</span></button>
+          <button class="filter" data-filter="completed" type="button">Completed <span id="completedCount">0</span></button>
+        </div>
+      </div>
+
+      <div class="lists-grid">
+        <section class="list-panel">
+          <div class="list-title"><div class="title-dot pending-dot"></div><h3>Pending tasks</h3><span class="count-pill" id="pendingHeadingCount">0</span></div>
+          <ul class="task-list" id="pendingList"></ul>
+          <div class="empty-state" id="pendingEmpty"><span class="empty-illustration">✎</span><strong>Nothing pending</strong><p>Add a task above and make it happen.</p></div>
+        </section>
+        <section class="list-panel completed-panel">
+          <div class="list-title"><div class="title-dot completed-dot"></div><h3>Completed</h3><span class="count-pill" id="completedHeadingCount">0</span></div>
+          <ul class="task-list" id="completedList"></ul>
+          <div class="empty-state" id="completedEmpty"><span class="empty-illustration">✦</span><strong>Your wins show up here</strong><p>Complete a task to see it here.</p></div>
+        </section>
+      </div>
+    </section>
+    <footer><span>Built with focus <b>✦</b></span><span>Your tasks stay saved on this device.</span></footer>
+  </main>
+
+  <dialog id="editDialog" class="edit-dialog">
+    <form method="dialog" id="editForm">
+      <p class="eyebrow">UPDATE TASK</p><h2>Edit your task</h2>
+      <label for="editInput">Task name</label>
+      <input id="editInput" maxlength="120" required>
+      <div class="dialog-actions"><button class="cancel-button" value="cancel">Cancel</button><button class="add-button" id="saveEdit" value="save">Save changes</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
